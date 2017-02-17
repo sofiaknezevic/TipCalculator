@@ -30,7 +30,7 @@
 
 - (IBAction)calculateTip:(UIButton *)sender {
     
-    double billAmount;
+    double billAmount = [self.billAmountTextField.text floatValue];
     
     double tipAmount;
     
@@ -39,8 +39,7 @@
         tipAmount = (billAmount * [self.tipPercentageTextField.text floatValue]);
         
     }else{
-        
-        billAmount = [self.billAmountTextField.text floatValue];
+    
         
         tipAmount = (billAmount * self.defaultTip);
     }
