@@ -10,8 +10,10 @@
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *billAmountTextField;
-@property (nonatomic, assign) CGFloat defaultTip;
+@property (weak, nonatomic) IBOutlet UILabel *tipAmountLabel;
+@property (weak, nonatomic) IBOutlet UITextField *tipPercentageTextField;
 
+@property (nonatomic, assign) CGFloat defaultTip;
 
 @end
 
@@ -28,13 +30,24 @@
 
 - (IBAction)calculateTip:(UIButton *)sender {
     
-    double billAmount = [self.billAmountTextField.text floatValue];
+    double billAmount;
     
-    //NSLog(@"Your bill amount is, $%.02f", billAmount);
+    double tipAmount;
     
-    double tipAmount = (billAmount * self.defaultTip);
+    if([self.tipPercentageTextField.text floatValue]){
+        
+        tipAmount = (billAmount * [self.tipPercentageTextField.text floatValue]);
+        
+    }else{
+        
+        billAmount = [self.billAmountTextField.text floatValue];
+        
+        tipAmount = (billAmount * self.defaultTip);
+    }
     
-    //NSLog(@"Your tip amount is $%0.2f", tipAmount);
+    NSString *tipAmountText = [NSString stringWithFormat:@"You should tip $%0.2f", tipAmount];
+    
+    self.tipAmountLabel.text = tipAmountText;
     
 }
 
